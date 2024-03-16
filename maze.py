@@ -1,3 +1,6 @@
+import time
+
+
 class CoinCollector():
 
     # PART 1
@@ -106,5 +109,15 @@ def readMazeFromFile(file_name):
 startRow = int(input("Enter starting row: "))
 startCol = int(input("Enter starting column: "))
 
-print(CoinCollector.findMaxCoinsTopDown(startRow, startCol))
-print(CoinCollector.findMaxCoinsBottomUp(startRow, startCol))
+
+start_time = time.time()
+CoinCollector.findMaxCoinsTopDown(startRow, startCol)
+end_time = time.time()
+print(
+    f"Total time taken to execute findMaxCoinsTopDown function: {end_time - start_time} sec")
+
+start_time = time.time()
+CoinCollector.findMaxCoinsBottomUp(startRow, startCol)
+end_time = time.time()
+print(
+    f"Total time taken to execute findMaxCoinsBottomUp function: {end_time - start_time} sec")
