@@ -54,30 +54,31 @@ class CoinCollector():
         maze, rows, cols = readMazeFromFile('maze.txt')
 
         # start by initializing data points with -1 as the default value for fall back
-        data_points = [[-1 for i in range(cols)] for j in range(rows)]
+        data_points = [[-1 for _ in range(cols)] for _ in range(rows)]
         # Assign default values for the end position in the maze thus botom-up
         data_points[-1][-1] = int(maze[-1][-1]
                                   ) if maze[-1][-1].isdigit() else 0
 
         # calculation of correct values to the left of the ending position upto the starting column
-        for col in range(cols-2, startCol-1, -1):
-            if maze[-1][col] == 'x':
-                data_points[-1][col] = -1
+        for col in range(cols - 2, startCol - 1, -1):
+            if maze[rows - 1][col] == 'x':
+                data_points[rows - 1][col] = -1
             else:
-                data_points[-1][col] = data_points[-1][col + 1] + \
-                    (int(maze[-1][col]) if maze[-1][col].isdigit() else 0)
+                data_points[rows - 1][col] = data_points[rows - 1][col + 1] + \
+                    (int(maze[rows - 1][col])
+                     if maze[rows - 1][col].isdigit() else 0)
 
         # calculation of the correct values above the end postion upto the starting row
-        for row in range(rows-2, startRow-1, -1):
-            if maze[row-1][-1] == 'x':
-                maze[row-1][-1] = -1
+        for row in range(rows - 2, startRow - 1, -1):
+            if maze[row][cols - 1] == 'x':
+                data_points[row][cols - 1] = -1
             else:
-                data_points[row][-1] = data_points[row + 1][-1] + \
-                    (int(maze[row][-1]) if maze[row]
-                     [-1].isdigit() else 0)
+                data_points[row][cols - 1] = data_points[row + 1][cols - 1] + \
+                    (int(maze[row][cols - 1]) if maze[row]
+                     [cols - 1].isdigit() else 0)
 
-        for row in range(rows-2, startRow-1, -1):
-            for col in range(cols-2, startCol-1, -1):
+        for row in range(rows - 2, startRow - 1, -1):
+            for col in range(cols - 2, startCol - 1, -1):
                 if maze[row][col] != 'x':
                     coins_from_bottom = data_points[row +
                                                     1][col] if data_points[row + 1][col] != -1 else -1
