@@ -10,3 +10,5 @@
   -  As with the D&C approach, equidistant approaches take equal amount of time or have negligible variance in time difference
   -  The variance in execution time between two equidistant starting points is wider in DP
 3. D&C proved faster as it took less execution time in all instances
+
+  - ![result on time of execution](https://github.com/PhillipSaint254/maze-puzzle-coin-collector/assets/75745682/0949c577-9547-4c1c-88c4-0a56b6d8d2af)
